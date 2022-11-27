@@ -12,11 +12,43 @@
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
-    "eslint": "8.28.0",
-    "eslint-config-next": "13.0.5",
+    "firebase": "^9.14.0",
     "next": "13.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-firebase-hooks": "^5.1.1",
     "typescript": "4.9.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "eslint-config-next": "^13.0.5",
+    "prettier": "^2.8.0"
+  },
+  "eslintConfig": {
+    "rules": {
+        "eslint-disable-next-line react/no-unescaped-entities": [
+
+        ]
+    }
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "endOfLine": "lf",
+    "htmlWhitespaceSensitivity": "css",
+    "insertPragma": false,
+    "singleAttributePerLine": true,
+    "bracketSameLine": false,
+    "jsxSingleQuote": false,
+    "printWidth": 80,
+    "proseWrap": "preserve",
+    "quoteProps": "as-needed",
+    "requirePragma": false,
+    "semi": true,
+    "singleQuote": false,
+    "tabWidth": 4,
+    "trailingComma": "none",
+    "useTabs": false,
+    "embeddedLanguageFormatting": "auto"
   }
 }
