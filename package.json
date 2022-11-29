@@ -24,13 +24,6 @@
     "eslint-config-next": "^13.0.5",
     "prettier": "^2.8.0"
   },
-  "eslintConfig": {
-    "rules": {
-        "eslint-disable-next-line react/no-unescaped-entities": [
-
-        ]
-    }
-  },
   "prettier": {
     "arrowParens": "always",
     "bracketSpacing": true,
