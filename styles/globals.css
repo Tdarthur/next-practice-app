@@ -156,10 +156,11 @@ button.btn-green {
 button.btn-google {
     background-color: white;
     color: var(--color-text);
+
+    position: relative;
 }
 
 .btn-google img {
-    width: 30px;
     margin-right: 10px;
 }
 

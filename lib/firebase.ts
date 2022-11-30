@@ -1,5 +1,5 @@
-import firebase from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getApps, initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -13,10 +13,12 @@ const firebaseConfig = {
     measurementId: "G-489D3HDCML"
 };
 
-if (!firebase.getApps().length) {
-    firebase.initializeApp(firebaseConfig);
+if (!getApps().length) {
+    initializeApp(firebaseConfig);
 }
 
 export const auth = getAuth();
+export const googleAuthProvider = new GoogleAuthProvider();
+
 export const firestore = getFirestore();
 export const storage = getStorage();
