@@ -23,27 +23,24 @@ export default function Navbar() {
                     <>
                         <li className="push-left">
                             <Link href="/admin">
-                                <button className="btn-blue">
-                                    Write Posts
-                                </button>
+                                <button className="btn-blue">Write Posts</button>
                             </Link>
                         </li>
                         <li>
-                            <button onClick={() => signOut(auth)}>
-                                Sign Out
-                            </button>
+                            <button onClick={() => signOut(auth)}>Sign Out</button>
                         </li>
-                        <li>
-                            <Link href={`/${username}`}>
+                        <li className="display-content">
+                            {/* TODO: FIX THE FORMATTING ON THIS (why does the content hit the top of window??) */}
+                            <Link
+                                href={`/${username}`}
+                                className="profile-img display-content"
+                            >
                                 <Image
-                                    src={
-                                        user && user.photoURL
-                                            ? "/anonymous.png"
-                                            : "/anonymous.png"
-                                    }
+                                    src={user && user.photoURL ? user.photoURL : "/anonymous.png"}
                                     alt="user profile picture"
-                                    width={64}
-                                    height={64}
+                                    width={48}
+                                    height={48}
+                                    style={{ margin: "0.5rem 0" }}
                                 />
                             </Link>
                         </li>

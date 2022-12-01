@@ -1,20 +1,66 @@
-import Link from "next/link";
+import { GetServerSideProps } from "next";
+import { collection, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 
-import Loader from "../../components/Loader";
+import { getUserWithUsername, postToJSON } from "../../lib/firebase";
 
-export default function User({}) {
+import UserModel from "../../models/UserModel";
+import PostModel from "../../models/PostModel";
+
+import UserProfile from "../../components/UserProfile";
+import PostFeed from "../../components/PostFeed";
+
+/**
+ * Max posts to query per page
+ */
+const POST_LIMIT = 5;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const { username } = context.query;
+
+    const userDocument = await getUserWithUsername(username as string);
+
+    let user: UserModel | null = null;
+    let posts: PostModel[] | null = null;
+
+    if (userDocument) {
+        user = userDocument.data();
+
+        const postsQuery = query(
+            collection(userDocument.ref, "posts"),
+            where("published", "==", true),
+            orderBy("createdAt", "desc"),
+            limit(POST_LIMIT)
+        );
+
+        posts = (await getDocs(postsQuery)).docs.map(postToJSON);
+    }
+
+    return {
+        props: { user, posts }
+    };
+};
+
+type Props = {
+    user: UserModel;
+    posts: Array<PostModel>;
+};
+
+export default function UserProfilePage({ user, posts }: Props) {
     return (
         <main>
-            <Loader show />
-            <Link
-                prefetch
-                href={{
-                    pathname: "/[username]",
-                    query: { username: "tyler" }
-                }}
-            >
-                {"Tyler's Profile"}
-            </Link>
+            {user ? (
+                <>
+                    <UserProfile user={user} />
+                    <PostFeed
+                        posts={posts}
+                        admin={false}
+                    />
+                </>
+            ) : (
+                <h1 className="text-danger">
+                    User <i>{user}</i> not found
+                </h1>
+            )}
         </main>
     );
 }

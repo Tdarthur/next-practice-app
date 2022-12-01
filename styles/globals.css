@@ -192,6 +192,7 @@ button.btn-logo {
     margin: auto;
     border-radius: 50%;
     max-width: 150px;
+    overflow: hidden;
 }
 
 .card-info {
@@ -208,6 +209,10 @@ button.btn-logo {
     width: 50px;
     height: 50px;
     animation: spin 2s linear infinite;
+}
+
+.display-content {
+    display: contents;
 }
 
 @keyframes spin {
@@ -271,4 +276,14 @@ input[type="file"] {
 
 .hidden {
     display: none;
+}
+
+.profile-img {
+    position: relative;
+    aspect-ratio: 1;
+}
+
+.post-title {
+    margin: 1rem 0;
+    font-size: 1.25rem;
 }

@@ -1,32 +1,17 @@
-import {
-    useContext,
-    useEffect,
-    useState,
-    useMemo,
-    ChangeEvent,
-    FormEvent
-} from "react";
+import { useContext, useEffect, useState, useMemo, ChangeEvent, FormEvent } from "react";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { doc, getDoc, writeBatch } from "firebase/firestore";
 import Image from "next/image";
+import toast from "react-hot-toast";
 import debounce from "lodash.debounce";
 
 import { auth, googleAuthProvider, firestore } from "../lib/firebase";
 import { UserContext } from "../lib/context";
-import toast from "react-hot-toast";
 
-export default function EnterPage({}) {
+export default function EnterPage() {
     const { user, username } = useContext(UserContext);
 
-    return (
-        <main>
-            {!user ? (
-                <SignInButton />
-            ) : (
-                <>{!username ? <UsernameForm /> : <SignOutButton />}</>
-            )}
-        </main>
-    );
+    return <main>{!user ? <SignInButton /> : <>{!username ? <UsernameForm /> : <SignOutButton />}</>}</main>;
 }
 
 function SignInButton() {
@@ -163,15 +148,7 @@ function UsernameForm() {
     );
 }
 
-function UsernameMessage({
-    username,
-    isValid,
-    loading
-}: {
-    username: string;
-    isValid: boolean;
-    loading: boolean;
-}) {
+function UsernameMessage({ username, isValid, loading }: { username: string; isValid: boolean; loading: boolean }) {
     if (username.length === 0) {
         return <></>;
     }
@@ -181,11 +158,7 @@ function UsernameMessage({
     } else if (isValid) {
         return <p className="text-success">{username} is available!</p>;
     } else if (username.length < 3) {
-        return (
-            <p className="text-info">
-                Username must be longer than 3 characters.
-            </p>
-        );
+        return <p className="text-info">Username must be longer than 3 characters.</p>;
     } else if (username && !isValid) {
         return <p className="text-danger">That username is taken!</p>;
     }
