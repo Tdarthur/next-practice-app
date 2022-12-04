@@ -7,6 +7,7 @@ import { firestore, postToJSON } from "../lib/firebase";
 import PostModel from "../models/PostModel";
 import PostFeed from "../components/PostFeed";
 import Loader from "../components/Loader";
+import Metatags from "../components/Metatags";
 
 /**
  * Max posts to query per page
@@ -61,6 +62,11 @@ export default function Home({ originalPosts }: Props) {
 
     return (
         <main>
+            <Metatags
+                title="Home"
+                description="home feed"
+            />
+
             <PostFeed
                 posts={posts}
                 admin={false}

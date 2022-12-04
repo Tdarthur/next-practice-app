@@ -1,7 +1,13 @@
+import Metatags from "../../components/Metatags";
+
 export default function AdminUser({}) {
     return (
         <main>
-            <h1>Am an admin</h1>
+            <Metatags
+                title="Edit Post"
+                description="admin page for editing posts"
+            />
+            <h1>Edit Post</h1>
         </main>
     );
 }

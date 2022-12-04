@@ -8,6 +8,7 @@ import PostModel from "../../models/PostModel";
 
 import UserProfile from "../../components/UserProfile";
 import PostFeed from "../../components/PostFeed";
+import Metatags from "../../components/Metatags";
 
 /**
  * Max posts to query per page
@@ -18,6 +19,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { username } = context.query;
 
     const userDocument = await getUserWithUsername(username as string);
+
+    if (!userDocument) {
+        return { notFound: true };
+    }
 
     let user: UserModel | null = null;
     let posts: PostModel[] | null = null;
@@ -48,6 +53,11 @@ type Props = {
 export default function UserProfilePage({ user, posts }: Props) {
     return (
         <main>
+            <Metatags
+                title={`${user.username}`}
+                description={`profile of ${user.username}`}
+                image={user.photoURL || undefined}
+            />
             {user ? (
                 <>
                     <UserProfile user={user} />
